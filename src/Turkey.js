@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 
-class Home extends Component {
+class Turkey extends Component {
 
   constructor(props) {
     super(props);
@@ -11,7 +11,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-      fetch("https://randomuser.me/api/?results=10")
+      fetch("https://randomuser.me/api/?results=10&nat=tr")
         .then(res => res.json())
         .then(parsedJSON => parsedJSON.results.map(data => (
           {
@@ -20,6 +20,7 @@ class Home extends Component {
             lastName: `${data.name.last}`,
             location: `${data.location.state}, ${data.nat}`,
             thumbnail: `${data.picture.large}`,
+            email: `${data.email}`,
 
           }
         )))
@@ -37,14 +38,15 @@ class Home extends Component {
             <h2>Random User</h2>
             {
               items.length > 0 ? items.map(item => {
-              const {id, firstName, lastName, location, thumbnail} = item;
+              const {id, firstName, lastName, location, thumbnail, email} = item;
                return (
 
                <div key={id} className="bgCircle">
-               <center><img src={thumbnail} alt={firstName} className="circle"/> </center><br />
-               <div className="ctr">
+                <center><img src={thumbnail} alt={firstName} className="circle"/> </center><br />
+                <div className="ctr">
                   {firstName} {lastName}<br />
-                  {location}
+                  {location}<br />
+                  {email}
                 </div>
 
               </div>
@@ -57,4 +59,4 @@ class Home extends Component {
     }
   }
 
-export default Home;
+export default Turkey;
